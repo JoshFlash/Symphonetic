@@ -45,20 +45,9 @@ builder.Services.AddAuthentication(options =>
 
 var app = builder.Build();
 
-/*/ TODO - Automatically create/update the database at startup
-using (var scope = app.Services.CreateScope())
-{
-    // Note that EnsureCreated() does not use migrations to create the database and
-    // therefore can't be used to update the schema if we make changes to our models.
-    // In that case, we will need to manually drop the database or use migrations.
-
-    var dbContext = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    dbContext.Database.EnsureCreated();
-}
-/*/
-
 // Run assorted tests here as desired
-Tests.Jwt.RunTest(builder.Configuration);
+Tests.Jwt.TestValidation(builder.Configuration);
+await Tests.SqlServer.TestDatabaseOperations(app.Services);
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

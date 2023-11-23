@@ -52,7 +52,7 @@ public class AccountController(UserManager<ApplicationUser> userManager, SignInM
             Subject = new ClaimsIdentity(new Claim[]
             {
                 new (ClaimTypes.NameIdentifier, user.Id),
-                new (ClaimTypes.Email, user.Email)
+                new (ClaimTypes.Email, user.Email ?? "NONE")
                 // Add more claims as required
             }),
             Expires = DateTime.UtcNow.AddDays(7), // Token expiration
