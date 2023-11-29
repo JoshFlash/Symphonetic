@@ -23,7 +23,7 @@ public class AccountController(UserManager<ApplicationUser> userManager, SignInM
 
         var result = await userManager.CreateAsync(user, model.Password);
 
-        return result.Succeeded ? Ok(new { message = "User registered successfully" } ) : BadRequest(result.Errors);
+        return result.Succeeded ? Ok(new { message = "User registered successfully" }) : BadRequest(result.Errors);
     }
     
     [HttpPost("login")]
@@ -64,6 +64,3 @@ public class AccountController(UserManager<ApplicationUser> userManager, SignInM
     }
 
 }
-
-public record RegisterModel(string UserName, string Email, string Password);
-public record LoginModel(string Email, string Password);

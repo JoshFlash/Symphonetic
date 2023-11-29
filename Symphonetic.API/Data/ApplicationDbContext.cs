@@ -1,8 +1,9 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Symphonetic.API.Models;
 
 namespace Symphonetic.API.Data;
+
+using Models;
 
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 {
@@ -11,16 +12,14 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 
     public DbSet<UserInfo> UserInfos { get; set; }
     
+    public DbSet<Project> Projects { get; set; }
+    
     protected override void OnModelCreating(ModelBuilder builder)
     {
         base.OnModelCreating(builder);
 
-        // Define UserInfo entity
-        builder.Entity<UserInfo>(entity =>
-        {
-            // Entity configuration goes here
-            entity.Property(e => e.FirstName).IsRequired();
-        });
+        builder.Entity<UserInfo>(entity => entity.Property(e => e.FirstName).IsRequired());
+        builder.Entity<Project>(entity => entity.Property(e => e.Name).IsRequired());
     }
 
 }

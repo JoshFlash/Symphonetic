@@ -5,3 +5,4 @@ public class ApplicationUser(string UserName) : IdentityUser(UserName)
 {
     public UserInfo? Info { get; set; }
 }
+
